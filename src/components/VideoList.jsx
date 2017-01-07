@@ -15,11 +15,9 @@
 // }
 var VideoList = (props) => (
   <div className="video-list media">
-    <ul>
-      {console.log(props.videos)}
-      {props.videos.map(video => <VideoListEntry video = {video} />)}
-
-    </ul>
+ 
+      {props.videos.map( video => <VideoListEntry video = {video} />)}
+  
   </div>
 );
 
