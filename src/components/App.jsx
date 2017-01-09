@@ -1,27 +1,49 @@
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      video: window.exampleVideoData[0], //current video playing // give it a default value
+      video: null, 
+      videos: []
     };
   }
 
-  updateStateOfApp (video) {
-    console.log('i got clicked!');
-    this.setState = ({
-      video: video, //video that will play onClick
+  componentDidMount() {
+    this.getYouTubeVideos('react tutorials');
+  }
+
+  getYouTubeVideos(query) {
+    var options = {
+      key: this.props.API_KEY,
+      query: query
+    };
+
+    this.props.searchYouTube(options, (videos) => 
+      this.setState({
+        videos: videos,
+        video: videos[0]
+      })
+    );
+  }
+
+  updateStateOfApp (clickedVideo) {
+    // console.log('i got clicked!');
+    this.setState ({
+      video: clickedVideo, //video that will play onClick
     });
   }
 
   render() {
     return (
       <div>
-        <Nav />
+        <Nav handleSearchInputChange={this.getYouTubeVideos.bind(this)}/>
         <div className="col-md-7">
           <VideoPlayer video={this.state.video}/> 
         </div>
         <div className="col-md-5">
-          <VideoList updateStateOfApp={this.updateStateOfApp.bind(this)} videos={window.exampleVideoData}/>
+          <VideoList 
+            updateStateOfApp={this.updateStateOfApp.bind(this)} 
+            videos={this.state.videos}
+          />
         </div>
       </div>
     );

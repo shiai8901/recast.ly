@@ -1,21 +1,24 @@
-var VideoPlayer = (props) => {
-  console.log('vid id', props.video.id.videoId);
-  var url = 'https://www.youtube.com/embed/' + props.video.id.videoId;
-  console.log('url',url);
-  return (
-    <div className="video-player">
-      <div className="embed-responsive embed-responsive-16by9">
-        <iframe className="embed-responsive-item" src={url} allowFullScreen></iframe>
+var VideoPlayer = ({video}) => {
+  if (!video) {
+    // if the props.video is null, show 'please wait'
+    return <div className="video-player">Please wait</div>; 
+  } else {
+    // console.log('vid id', props.video.id.videoId);
+    var url = 'https://www.youtube.com/embed/' + video.id.videoId;
+    // console.log('url',url);
+    return (
+      <div className="video-player">
+        <div className="embed-responsive embed-responsive-16by9">
+          <iframe className="embed-responsive-item" src={url} allowFullScreen></iframe>
+        </div>
+        <div className="video-player-details">
+          <h3>{video.snippet.title}</h3>
+          <div>{video.snippet.description}</div>
+        </div>
       </div>
-      <div className="video-player-details">
-        <h3>{props.video.snippet.title}</h3>
-        <div>{props.video.snippet.description}</div>
-        <script>
-          VideoListEntry
-        </script>
-      </div>
-    </div>
-    );
+      );
+  }
+
 };
 
 
