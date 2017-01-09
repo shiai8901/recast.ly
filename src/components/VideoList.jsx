@@ -1,4 +1,4 @@
-var VideoList = ({videos,updateStateOfApp}) => (
+var VideoList = ({videos, updateStateOfApp}) => (
     <div className="video-list media">
         {videos.map((video) => 
           <VideoListEntry 

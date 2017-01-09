@@ -16,7 +16,7 @@ var VideoPlayer = ({video}) => {
           <div>{video.snippet.description}</div>
         </div>
       </div>
-      );
+    );
   }
 
 };
